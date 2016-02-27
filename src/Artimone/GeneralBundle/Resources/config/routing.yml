@@ -1,0 +1,3 @@
+artimone_general_homepage:
+    path:     /
+    defaults: { _controller: ArtimoneGeneralBundle:General:index }
