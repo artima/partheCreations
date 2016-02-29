@@ -41,5 +41,4 @@
 
 /nbproject
 
-/app/spool/*
-!/app/default
+/app/spool/default/*
