@@ -5,12 +5,12 @@ namespace Artimone\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category
+ * Gender
  *
- * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="Artimone\BlogBundle\Repository\CategoryRepository")
+ * @ORM\Table(name="gender")
+ * @ORM\Entity(repositoryClass="Artimone\BlogBundle\Repository\GenderRepository")
  */
-class Category
+class Gender
 {
     /**
      * @var int
@@ -44,7 +44,7 @@ class Category
      *
      * @param string $name
      *
-     * @return Category
+     * @return Gender
      */
     public function setName($name)
     {

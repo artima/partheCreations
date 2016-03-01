@@ -61,16 +61,16 @@ class Annonce
     private $image;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Artimone\BlogBundle\Entity\Category", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Artimone\BlogBundle\Entity\Gender", cascade={"persist"})
      */
-    private $categories;
+    private $genders;
     
-    // Comme la propriété $categories doit être un ArrayCollection,
+    // Comme la propriété $gender doit être un ArrayCollection,
     // On doit la définir dans un constructeur :
     public function __construct()
     {
       $this->date = new \Datetime();
-      $this->categories = new ArrayCollection();
+      $this->genders = new ArrayCollection();
     }
 
     /**
@@ -214,24 +214,24 @@ class Annonce
     }
     
     // Notez le singulier, on ajoute une seule catégorie à la fois
-    public function addCategory(Category $category)
+    public function addGender(Gender $gender)
     {
       // Ici, on utilise l'ArrayCollection vraiment comme un tableau
-      $this->categories[] = $category;
+      $this->genders[] = $gender;
 
       return $this;
     }
 
-    public function removeCategory(Category $category)
+    public function removeGender(Gender $gender)
     {
       // Ici on utilise une méthode de l'ArrayCollection, pour supprimer la catégorie en argument
-      $this->categories->removeElement($category);
+      $this->genders->removeElement($gender);
     }
 
     // Notez le pluriel, on récupère une liste de catégories ici !
-    public function getCategories()
+    public function getGenders()
     {
-      return $this->categories;
+      return $this->genders;
     }
 
 }
