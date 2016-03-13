@@ -1,7 +1,0 @@
-artimone_parthe_photos:
-    resource: "@ArtimonePartheBundle/Resources/config/routing/photos.yml"
-    prefix:   admin/photos
-
-artimone_parthe_category:
-    resource: "@ArtimonePartheBundle/Resources/config/routing/category.yml"
-    prefix:   admin/category

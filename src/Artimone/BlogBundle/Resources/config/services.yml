@@ -1,5 +1,0 @@
-# src/artimone/BlogBundle/Resources/config/services.yml
-services:
-    artimone_blog.antispam:
-        class: Artimone\BlogBundle\Services\Antispam
-        arguments: ['@mailer', %locale%, 50]
