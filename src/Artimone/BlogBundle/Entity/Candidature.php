@@ -43,7 +43,7 @@ class Candidature
     private $date;
     
     /**
-    * @ORM\ManyToOne(targetEntity="Artimone\BlogBundle\Entity\Annonce")
+    * @ORM\ManyToOne(targetEntity="Artimone\BlogBundle\Entity\Annonce", inversedBy="candidature")
     * @ORM\JoinColumn(nullable=false)
     */
     private $annonce;

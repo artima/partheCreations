@@ -29,7 +29,7 @@ class AnnonceSkill
     private $niveau;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Artimone\BlogBundle\Entity\Annonce")
+     * @ORM\ManyToOne(targetEntity="Aertimone\BlogBundle\Entity\Annonce")
      * @ORM\JoinColumn(nullable=false)
      */
     private $annonce;
@@ -73,52 +73,5 @@ class AnnonceSkill
     {
         return $this->niveau;
     }
-
-    /**
-     * Set annonce
-     *
-     * @param \Artimone\BlogBundle\Entity\Annonce $annonce
-     *
-     * @return AnnonceSkill
-     */
-    public function setAnnonce(\Artimone\BlogBundle\Entity\Annonce $annonce)
-    {
-        $this->annonce = $annonce;
-
-        return $this;
-    }
-
-    /**
-     * Get annonce
-     *
-     * @return \Artimone\BlogBundle\Entity\Annonce
-     */
-    public function getAnnonce()
-    {
-        return $this->annonce;
-    }
-
-    /**
-     * Set skill
-     *
-     * @param \Artimone\BlogBundle\Entity\Skill $skill
-     *
-     * @return AnnonceSkill
-     */
-    public function setSkill(\Artimone\BlogBundle\Entity\Skill $skill)
-    {
-        $this->skill = $skill;
-
-        return $this;
-    }
-
-    /**
-     * Get skill
-     *
-     * @return \Artimone\BlogBundle\Entity\Skill
-     */
-    public function getSkill()
-    {
-        return $this->skill;
-    }
 }
+

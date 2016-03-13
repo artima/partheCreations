@@ -1,0 +1,24 @@
+annonceskill_index:
+    path:     /
+    defaults: { _controller: "ArtimoneBlogBundle:AnnonceSkill:index" }
+    methods:  GET
+
+annonceskill_show:
+    path:     /{id}/show
+    defaults: { _controller: "ArtimoneBlogBundle:AnnonceSkill:show" }
+    methods:  GET
+
+annonceskill_new:
+    path:     /new
+    defaults: { _controller: "ArtimoneBlogBundle:AnnonceSkill:new" }
+    methods:  [GET, POST]
+
+annonceskill_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ArtimoneBlogBundle:AnnonceSkill:edit" }
+    methods:  [GET, POST]
+
+annonceskill_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ArtimoneBlogBundle:AnnonceSkill:delete" }
+    methods:  DELETE
