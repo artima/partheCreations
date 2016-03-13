@@ -65,12 +65,20 @@ class Annonce
      */
     private $genders;
     
+    /**
+   * @ORM\OneToMany(targetEntity="Artimone\BlogBundle\Entity\Candidature", mappedBy="annonce")
+   */
+    private $candidatures; // Notez le « s », une annonce est liée à plusieurs candidatures
+
+    // …
+    
     // Comme la propriété $gender doit être un ArrayCollection,
     // On doit la définir dans un constructeur :
     public function __construct()
     {
       $this->date = new \Datetime();
       $this->genders = new ArrayCollection();
+      $this->candidatures = new ArrayCollection();
     }
 
     /**
@@ -234,4 +242,38 @@ class Annonce
       return $this->genders;
     }
 
+
+    /**
+     * Add candidature
+     *
+     * @param \Artimone\BlogBundle\Entity\Candidature $candidature
+     *
+     * @return Annonce
+     */
+    public function addCandidature(\Artimone\BlogBundle\Entity\Candidature $candidature)
+    {
+        $this->candidatures[] = $candidature;
+
+        return $this;
+    }
+
+    /**
+     * Remove candidature
+     *
+     * @param \Artimone\BlogBundle\Entity\Candidature $candidature
+     */
+    public function removeCandidature(\Artimone\BlogBundle\Entity\Candidature $candidature)
+    {
+        $this->candidatures->removeElement($candidature);
+    }
+
+    /**
+     * Get candidatures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidatures()
+    {
+        return $this->candidatures;
+    }
 }

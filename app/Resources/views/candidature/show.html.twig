@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Candidature</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ candidature.id }}</td>
+            </tr>
+            <tr>
+                <th>Author</th>
+                <td>{{ candidature.author }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ candidature.content }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if candidature.date %}{{ candidature.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('candidature_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('candidature_edit', { 'id': candidature.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

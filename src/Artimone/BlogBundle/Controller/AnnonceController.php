@@ -2,52 +2,127 @@
 
 namespace Artimone\BlogBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Artimone\BlogBundle\Entity\Annonce;
+use Artimone\BlogBundle\Form\AnnonceType;
+
+/**
+ * Annonce controller.
+ *
+ */
 class AnnonceController extends Controller
 {
-    public function indexAction($page)
+    /**
+     * Lists all Annonce entities.
+     *
+     */
+    public function indexAction()
     {
-         if ($page < 1) {
-            throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
-        }
-        return $this->render('ArtimoneBlogBundle:Annonce:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $annonces = $em->getRepository('ArtimoneBlogBundle:Annonce')->findAll();
+
+        return $this->render('annonce/index.html.twig', array(
+            'annonces' => $annonces,
+        ));
     }
-    
-    public function showAction($id)
-    {
-        return $this->render('ArtimoneBlogBundle:Annonce:show.html.twig', array('id' => $id));
-    }
-    
+
+    /**
+     * Creates a new Annonce entity.
+     *
+     */
     public function newAction(Request $request)
     {
-        // On récupère le service
-        $antispam = $this->container->get('artimone_blog.antispam');
-    
-        $text = '...';
-        if ($antispam->isSpam($text)) {
-          throw new \Exception('Votre message a été détecté comme spam !');
+        $annonce = new Annonce();
+        $form = $this->createForm('Artimone\BlogBundle\Form\AnnonceType', $annonce);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($annonce);
+            $em->flush();
+
+            return $this->redirectToRoute('annonce_show', array('id' => $annonce->getId()));
         }
-        if ($request->isMethod('POST')) {
-            $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
-            return $this->redirectToRoute('artimone_blog_show', array('id' => 5));
-        }
-        return $this->render('ArtimoneBlogBundle:Annonce:new.html.twig');
+
+        return $this->render('annonce/new.html.twig', array(
+            'annonce' => $annonce,
+            'form' => $form->createView(),
+        ));
     }
-    
-    public function editAction($id, Request $request)
+
+    /**
+     * Finds and displays a Annonce entity.
+     *
+     */
+    public function showAction(Annonce $annonce)
     {
-        if ($request->isMethod('POST')) {
-            $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
-            return $this->redirectToRoute('artimone_blog_show', array('id' => $id));
-        }
-        return $this->render('ArtimoneBlogBundle:Annonce:edit.html.twig', array('id' => $id));
+        $deleteForm = $this->createDeleteForm($annonce);
+
+        return $this->render('annonce/show.html.twig', array(
+            'annonce' => $annonce,
+            'delete_form' => $deleteForm->createView(),
+        ));
     }
-    
-    public function deleteAction($id)
+
+    /**
+     * Displays a form to edit an existing Annonce entity.
+     *
+     */
+    public function editAction(Request $request, Annonce $annonce)
     {
-        return $this->render('ArtimoneBlogBundle:Annonce:delete.html.twig', array('id' => $id));
+        $deleteForm = $this->createDeleteForm($annonce);
+        $editForm = $this->createForm('Artimone\BlogBundle\Form\AnnonceType', $annonce);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($annonce);
+            $em->flush();
+
+            return $this->redirectToRoute('annonce_edit', array('id' => $annonce->getId()));
+        }
+
+        return $this->render('annonce/edit.html.twig', array(
+            'annonce' => $annonce,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Deletes a Annonce entity.
+     *
+     */
+    public function deleteAction(Request $request, Annonce $annonce)
+    {
+        $form = $this->createDeleteForm($annonce);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($annonce);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('annonce_index');
+    }
+
+    /**
+     * Creates a form to delete a Annonce entity.
+     *
+     * @param Annonce $annonce The Annonce entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Annonce $annonce)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('annonce_delete', array('id' => $annonce->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
     }
 }

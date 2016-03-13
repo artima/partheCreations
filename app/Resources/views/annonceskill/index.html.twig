@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>AnnonceSkill list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Niveau</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonceSkill in annonceSkills %}
+            <tr>
+                <td><a href="{{ path('annonceskill_show', { 'id': annonceSkill.id }) }}">{{ annonceSkill.id }}</a></td>
+                <td>{{ annonceSkill.niveau }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('annonceskill_show', { 'id': annonceSkill.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('annonceskill_edit', { 'id': annonceSkill.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('annonceskill_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
