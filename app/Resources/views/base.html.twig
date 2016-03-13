@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Parthe!{% endblock %}</title>
+        {% stylesheets '@AppBundle/Resources/public/css/*' 'Bundles/artimonegeneral/css/*' filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %} 
+        {% block stylesheets %}{% endblock %}        
+        {% javascripts '@AppBundle/Resources/public/js/*' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="center-block">
+                    {{ include('/header.html.twig') }}
+                    {{ include('/menu.html.twig') }}        
+                    {% block body %}
+                        {% block fos_user_content %}
+                        {% endblock fos_user_content %}
+                    {% endblock %}                
+                    {{ include('/footer.html.twig') }}
+                </div>
+            </div>
+        </div>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

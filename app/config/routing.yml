@@ -1,0 +1,22 @@
+artimone_blog:
+    resource: "@ArtimoneBlogBundle/Resources/config/routing.yml"
+    prefix:   /blog
+
+artimone_parthe:
+    resource: "@ArtimonePartheBundle/Resources/config/routing.yml"
+    prefix:   /
+
+artimone_general:
+    resource: "@ArtimoneGeneralBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+    
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+

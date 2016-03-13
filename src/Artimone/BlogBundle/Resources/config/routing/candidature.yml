@@ -1,0 +1,24 @@
+candidature_index:
+    path:     /
+    defaults: { _controller: "ArtimoneBlogBundle:Candidature:index" }
+    methods:  GET
+
+candidature_show:
+    path:     /{id}/show
+    defaults: { _controller: "ArtimoneBlogBundle:Candidature:show" }
+    methods:  GET
+
+candidature_new:
+    path:     /new
+    defaults: { _controller: "ArtimoneBlogBundle:Candidature:new" }
+    methods:  [GET, POST]
+
+candidature_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ArtimoneBlogBundle:Candidature:edit" }
+    methods:  [GET, POST]
+
+candidature_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ArtimoneBlogBundle:Candidature:delete" }
+    methods:  DELETE

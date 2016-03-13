@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Photos list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Descphoto</th>
+                <th>Creationdate</th>
+                <th>category number</th>
+                <th>Actions</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for photo in photos %}
+            <tr>
+                <td><a href="{{ path('photos_show', { 'id': photo.id }) }}">{{ photo.id }}</a></td>
+                <td>{{ photo.name }}</td>
+                <td>{{ photo.descPhoto }}</td>
+                <td>{% if photo.creationDate %}{{ photo.creationDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ photo.category.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('photos_show', { 'id': photo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('photos_edit', { 'id': photo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>{% if photo.getWebPath() %}<img src="{{ asset(photo.getWebPath())|imagine_filter('my_thumb')  }}" />{% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('photos_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
