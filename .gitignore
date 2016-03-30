@@ -42,3 +42,5 @@
 /nbproject
 
 /app/spool/default/*
+
+.idea/

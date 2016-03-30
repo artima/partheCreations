@@ -14,10 +14,6 @@ artimone_blog_gender:
     resource: "@ArtimoneBlogBundle/Resources/config/routing/gender.yml"
     prefix:   /gender
 
-artimone_blog_image:
-    resource: "@ArtimoneBlogBundle/Resources/config/routing/image.yml"
-    prefix:   /image
-
 artimone_blog_skill:
     resource: "@ArtimoneBlogBundle/Resources/config/routing/skill.yml"
     prefix:   /skill

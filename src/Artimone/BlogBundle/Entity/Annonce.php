@@ -46,7 +46,7 @@ class Annonce
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="string", length=255)
+     * @ORM\Column(name="content", type="text")
      */
     private $content;
     
@@ -54,14 +54,16 @@ class Annonce
     * @ORM\Column(name="published", type="boolean")
     */
     private $published = true;
-    
+
     /**
     * @ORM\OneToOne(targetEntity="Artimone\BlogBundle\Entity\Image", cascade={"persist"})
+    * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
     */
     private $image;
     
     /**
      * @ORM\ManyToMany(targetEntity="Artimone\BlogBundle\Entity\Gender", cascade={"persist"})
+     * @ORM\JoinColumn(name="gender_id", referencedColumnName="id")
      */
     private $genders;
     
@@ -69,8 +71,15 @@ class Annonce
    * @ORM\OneToMany(targetEntity="Artimone\BlogBundle\Entity\Candidature", mappedBy="annonce")
    */
     private $candidatures; // Notez le « s », une annonce est liée à plusieurs candidatures
-
-    // …
+    
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString() 
+    {
+        return $this->getTitle();
+    }
     
     // Comme la propriété $gender doit être un ArrayCollection,
     // On doit la définir dans un constructeur :
@@ -210,12 +219,19 @@ class Annonce
     {
         return $this->published;
     }
+
+    /**
+     * @param \Artimone\BlogBundle\Entity\Image|null $image
+     */
     
     public function setImage(Image $image = null)
     {
       $this->image = $image;
     }
 
+    /**
+     * @return mixed
+     */
     public function getImage()
     {
       return $this->image;

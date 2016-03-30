@@ -1,5 +1,15 @@
 # src/artimone/BlogBundle/Resources/config/services.yml
+
 services:
     artimone_blog.antispam:
         class: Artimone\BlogBundle\Services\Antispam
-        arguments: ['@mailer', %locale%, 50]
+        arguments: ['@mailer', %locale%, 50]        
+
+    artimone_blog.beta.html:
+        class: Artimone\BlogBundle\Beta\BetaHTML
+        
+    #artimone_blog.beta.listener:
+     #   class: Artimone\BlogBundle\Beta\BetaListener
+      #  arguments: [@artimone_blog.beta.html, "2016-10-20"]
+       # tags:
+        #    - { name: kernel.event_listener, event: kernel.response, method: processBeta }

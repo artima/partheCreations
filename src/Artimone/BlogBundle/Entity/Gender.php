@@ -27,7 +27,15 @@ class Gender
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
+    
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString() 
+    {
+        return $this->getName();
+    }
 
     /**
      * Get id
