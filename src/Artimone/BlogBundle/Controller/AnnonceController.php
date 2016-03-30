@@ -37,6 +37,7 @@ class AnnonceController extends Controller
     {
         $annonce = new Annonce();
         $form = $this->createForm('Artimone\BlogBundle\Form\AnnonceType', $annonce);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -46,7 +47,6 @@ class AnnonceController extends Controller
 
             return $this->redirectToRoute('annonce_show', array('id' => $annonce->getId()));
         }
-
         return $this->render('annonce/new.html.twig', array(
             'annonce' => $annonce,
             'form' => $form->createView(),
