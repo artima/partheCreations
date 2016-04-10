@@ -3,7 +3,6 @@
 
 namespace Artimone\BlogBundle\Beta;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class BetaListener
@@ -21,17 +20,17 @@ class BetaListener
     $this->betaHTML = $betaHTML;
     $this->endDate  = new \Datetime($endDate);
   }
-  
+
   public function processBeta(FilterResponseEvent $event)
   {
     if (!$event->isMasterRequest()) {
       return;
     }
 
-    $remainingDays = $this->endDate->diff(new \Datetime())->format('%d');
+    $remainingDays = $this->endDate->diff(new \Datetime())->format('%m mois et %d jour(s)');
 
     // Si la date est dépassée, on ne fait rien
-    if ($remainingDays <= 0) {
+    if ($this->endDate <= new \Datetime()) {
       return;
     }
 

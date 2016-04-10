@@ -8,8 +8,8 @@ services:
     artimone_blog.beta.html:
         class: Artimone\BlogBundle\Beta\BetaHTML
         
-    #artimone_blog.beta.listener:
-     #   class: Artimone\BlogBundle\Beta\BetaListener
-      #  arguments: [@artimone_blog.beta.html, "2016-10-20"]
-       # tags:
-        #    - { name: kernel.event_listener, event: kernel.response, method: processBeta }
+    artimone_blog.beta.listener:
+        class: Artimone\BlogBundle\Beta\BetaListener
+        arguments: ['@artimone_blog.beta.html', "2016-05-20"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: processBeta }

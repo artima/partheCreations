@@ -2,6 +2,8 @@
 
 // src/Artimone/BlogBundle/Beta/BetaHTML.php
 
+namespace Artimone\BlogBundle\Beta;
+
 use Symfony\Component\HttpFoundation\Response;
 /**
  * Description of BetaHTML
@@ -16,7 +18,7 @@ class BetaHTML
     $content = $response->getContent();
 
     // Code à rajouter
-    $html = '<span style="color: red; font-size: 0.5em;"> - Beta J-'.(int) $remainingDays.' !</span>';
+    $html = '<span style="color: red; font-size: 0.5em;"> - Beta '. $remainingDays.' !</span>';
 
     // Insertion du code dans la page, dans le premier <h1>
     $content = preg_replace(
@@ -28,7 +30,7 @@ class BetaHTML
 
     // Modification du contenu dans la réponse
     $response->setContent($content);
-
+    
     return $response;
   }
 }

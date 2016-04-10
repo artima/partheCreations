@@ -2,11 +2,12 @@
 
 namespace Artimone\BlogBundle\Controller;
 
+use Artimone\BlogBundle\GrandVigil\GrandVigilEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Artimone\BlogBundle\Entity\Annonce;
-use Artimone\BlogBundle\Form\AnnonceType;
+use Artimone\BlogBundle\GrandVigil\MessagePostEvent;
 
 /**
  * Annonce controller.
@@ -41,6 +42,15 @@ class AnnonceController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // On crée l'évènement avec ses 2 arguments
+            $event = new MessagePostEvent($annonce->getContent(), $annonce->getUser());
+
+            // On déclenche l'évènement
+            $this
+                ->get('event_dispatcher')
+                ->dispatch(GrandVigilEvents::onMessagePost, $event)
+            ;
             $em = $this->getDoctrine()->getManager();
             $em->persist($annonce);
             $em->flush();

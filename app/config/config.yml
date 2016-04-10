@@ -68,7 +68,7 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:
         type: file
-        path: app/spool
+        path: '%kernel.root_dir%/spool'
     
 assetic:
     debug:          '%kernel.debug%'
